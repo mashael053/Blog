@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SingUp</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: rgba(217, 222, 251, 0.556);
+      overflow: hidden;
+    }
+
+    #error {
+      display: none;
+      padding: 2rem;
+      border-radius: 20px;
+      margin: auto;
+      border: solid 1px red;
+      width: 100%
+    }
+
+    .cont {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 70px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px rgba(34, 34, 34, 0.616);
+      background-color: rgba(200, 200, 200, 0.871);
+    }
+
+    .massage-alert {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Just an image -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo.png" height="40" alt="MDB Logo" loading="lazy" />
+      </a>
+    </div>
+  </nav>
+
+  <header>
+    <!-- Background image -->
+    <div class="p-5 text-center bg-image" style="
+ background-image: url('ba.png');
+        height: 84vh;
+        ">
+      <div class="mask" style="
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;">
+        <div class="cont">
+          <div id="error"></div>
+          <h2>SingUp</h2>
+          <input id="name" type="text" placeholder="Your Name:" />
+
+          <input id="email" type="email" placeholder="Email:" />
+          <input id="password" type="password" placeholder="password:" />
+
+          <div>
+            <button id="btn" class="btn mb-1" type="button">SingUp</button>
+            <p>I have acount <a href="Login.html">LogIn</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Background image -->
+    <footer class="bg-light text-center text-lg-start">
+      <!-- Copyright -->
+      <div class="text-center p-3">mshalalwajy08@gmail.com</div>
+    </footer>
+  </header>
+</body>
+
+<!-- MDB -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.js"></script>
+
+<script>
+  document.getElementById("btn").addEventListener("click", () => {
+
+    let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+    let nameValid = /^[A-Za-z]{5,}$/;
+    let mailValid = /^[A-Za-z0-9_\-]+@[A-Za-z0-9_\-]+\.[A-Za-z]{2,4}$/;
+    let passValid = /^\d{8,}$/;
+    let error = document.getElementById("error");
+    error.style.display = "block"
+
+
+
+    console.log(nameValid)
+    if (name.value === "" || email.value === "" || password.value === "") {
+      error.textContent = "You Have Empty inputs";
+    } else if (!email.value.match(mailValid)) {
+      error.textContent = "Invalid email address!!";
+    } else if (password.value != password.value.match(passValid)) {
+      error.textContent = "Entar a password only numbers and its more than 7!!";
+    } else if (name.value != name.value.match(nameValid)) {
+      error.textContent = "Entar a Name that is more than 4 Character and only Character!!";
+    } else {
+      fetch("https://655127797d203ab6626e943b.mockapi.io/users", {
+        method: "POST",
+        body: JSON.stringify({
+          name: name.value,
+          email: email.value,
+          password: password.value,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((json) => (window.location.href = "Login.html"));
+    }
+  });
+
+
+
+</script>
+
+</html>

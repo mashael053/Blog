@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog</title>
+  <script src="https://cdn.ckeditor.com/4.16.1/standard/ckeditor.js"></script>
+  <style>
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+
+    .nav img {
+      height: 50px;
+    }
+
+    body {
+      background-image: url(ba.png);
+    }
+
+    .nav .username {
+      margin-right: 20px;
+      font-size: 20px;
+    }
+
+    .blog-post {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px;
+    }
+
+    .delete-btn {
+      cursor: pointer;
+      color: red;
+      border: none;
+      background: none;
+      height: 40px;
+      width: 40px;
+
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    #btn {
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav img {
+        height: 30px;
+      }
+
+      .nav .username {
+        margin-right: 0;
+        margin-top: 10px;
+        font-size: 16px;
+      }
+
+      .blog-post {
+        padding: 5px;
+        margin: 5px;
+      }
+
+      .delete-btn {
+        height: 30px;
+        width: 30px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav {
+        padding: 5px;
+      }
+
+      .nav .username {
+        font-size: 14px;
+      }
+
+      .blog-post {
+        padding: 3px;
+        margin: 3px;
+      }
+
+      .delete-btn {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <img src="logo.png" alt="">
+    <span class="username"></span>
+
+  </nav>
+
+
+  <h1>Welcome to blog</h1>
+  <div class="d-flex w-100 justify-content-center">
+    <textarea name="textarea" cols="10" rows="10" class="w-50"></textarea>
+  </div>
+  <button class="text-center" id="btn">Submit</button>
+  <div id="blog"></div>
+
+  <script>
+    CKEDITOR.replace('textarea');
+    let blog = document.getElementById("blog")
+    let btn = document.getElementById("btn")
+
+    document.querySelector('.username').textContent = localStorage.getItem('user') || 'Guest';
+
+    btn.addEventListener("click", () => {
+      let texterea = CKEDITOR.instances.textarea.getData();
+      let blogPost = document.createElement("div");
+      blogPost.classList.add("blog-post");
+      blogPost.innerHTML = texterea + '<button class="delete-btn">Delete</button>';
+      blog.appendChild(blogPost);
+      blogPost.querySelector('.delete-btn').addEventListener('click', function () {
+        this.parentElement.remove();
+      });
+      CKEDITOR.instances.textarea.setData('');
+    });
+  </script>
+</body>
+
+</html>

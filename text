@@ -1,0 +1,61 @@
+/////////////LogIn
+//  <script>
+//     document.getElementById("btn").addEventListener("click", () => {
+//       let email = document.getElementById("email");
+//       let password = document.getElementById("password");
+
+//       fetch("https://655127797d203ab6626e943b.mockapi.io/users")
+//         .then((response) => response.json())
+//         .then((data) => {
+//           if (email.value === "" || password.value === "") {
+//             alert("You Have Empty inputs");
+//           } else {
+//             let findUser = data.find((d) => d.email === email.value);
+//             if (!findUser) {
+//               alert("wrong email !");
+//             } else if (password.value != findUser.password) {
+//               alert("wrong password!");
+//             } else {
+//               window.location.href = "blog.html";
+//             }
+//           }
+//         });
+//     });
+//   </script>
+
+////////////////////////SingUp
+//    <script>
+//     document.getElementById("btn").addEventListener("click", () => {
+//       let name = document.getElementById("name");
+//       let email = document.getElementById("email");
+//       let password = document.getElementById("password");
+//       let nameValid = /^[A-Za-z]{5,}$/;
+//       let mailValid = /^[A-Za-z0-9_\-]+@[A-Za-z0-9_\-]+\.[A-Za-z]{2,4}$/;
+//       let passValid = /^\d{8,}$/;
+//       if (name.value === "" || email.value === "" || password.value === "") {
+//         alert("You Have Empty inputs");
+//       } else if (email.value != email.value.match(mailValid)) {
+//         alert("Invalid email address!!");
+//       } else if (password.value != password.value.match(passValid)) {
+//         alert("Entar a password only numbers and its more than 7!!");
+//       } else if (name.value != name.value.match(nameValid)) {
+//         alert(
+//           "Entar a Name that is more than 4 Character and only Character!!"
+//         );
+//       } else {
+//         fetch("https://655127797d203ab6626e943b.mockapi.io/users", {
+//           method: "POST",
+//           body: JSON.stringify({
+//             name: name.value,
+//             email: email.value,
+//             password: password.value,
+//           }),
+//           headers: {
+//             "Content-type": "application/json; charset=UTF-8",
+//           },
+//         })
+//           .then((response) => response.json())
+//           .then((json) => (window.location.href = "Login.html"));
+//       }
+//     });
+//   </script>
